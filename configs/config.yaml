@@ -1,0 +1,16 @@
+Server:
+  RunMode: debug
+  HttpPort: 8000
+  ReadTimeout: 60
+  WriteTimeout: 60
+App:
+  DefaultContextTimeout: 60
+  LogSavePath: logs
+  LogFileName: deploy-agent
+  LogFileExt: .log
+  DeployPath: /Users/packer/Documents/github/tech/deploy-agent
+  DeployFiles:
+    - aaa.txt
+    - bbb.txt
+  ExecScripts:
+    - start.sh
