@@ -2,8 +2,6 @@ package service
 
 import (
     "context"
-
-    "github.com/spark8899/deploy-agent/global"
 )
 
 type Service struct {

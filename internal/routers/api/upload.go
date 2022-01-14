@@ -39,6 +39,7 @@ func (u Upload) UploadFile(c *gin.Context) {
     }
 
     response.ToResponse(gin.H{
-        "file_access_url": fileInfo.AccessUrl,
+        "file_name": fileInfo.Name,
+        "file_md5": fileInfo.FileMD5,
     })
 }

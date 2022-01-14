@@ -9,7 +9,6 @@ import (
     "github.com/gin-gonic/gin"
     "github.com/spark8899/deploy-agent/internal/middleware"
     "github.com/spark8899/deploy-agent/internal/routers/api"
-    "github.com/spark8899/deploy-agent/internal/routers/api/v1"
 )
 
 func NewRouter() *gin.Engine {
@@ -27,11 +26,7 @@ func NewRouter() *gin.Engine {
     upload := api.NewUpload()
     r.GET("/debug/vars", api.Expvar)
     r.POST("/upload/file", upload.UploadFile)
-    r.StaticFS("/static", http.Dir(global.AppSetting.UploadSavePath))
-    apiv1 := r.Group("/api/v1")
-    apiv1.Use() //middleware.JWT()
-    {
-    }
+    //r.StaticFS("/static", http.Dir(global.AppSetting.DeployPath))
 
     return r
 }

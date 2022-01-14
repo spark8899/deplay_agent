@@ -12,13 +12,17 @@ type ServerSettingS struct {
 }
 
 type AppSettingS struct {
+    DefaultPageSize       int
+    MaxPageSize           int
     DefaultContextTimeout time.Duration
     LogSavePath           string
     LogFileName           string
     LogFileExt            string
     DeployPath            string
+    UploadMaxSize         int
     DeployFiles           []string
     ExecScripts           []string
+    UploadAllowExts       []string
 }
 
 var sections = make(map[string]interface{})
