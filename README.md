@@ -1,6 +1,10 @@
 # deploy-agent
 Cooperate with jenkin to update software and execute restart procedure
 
+# version plan
+ * v1 Supports specific file uploads and specific commands for a single project
+ * v2 Support specific file uploads and specific commands for multiple projects
+
 # Test example
 command api
 ```
@@ -84,7 +88,8 @@ WorkingDirectory=/opt/app/deploy-agent
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
-User=apprun
+User=xxxx
+Group=xxxx
 
 [Install]
 WantedBy=multi-user.target
