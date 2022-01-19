@@ -11,6 +11,8 @@ import (
     "syscall"
     "time"
 
+    "github.com/spark8899/deploy-agent/pkg/tracer"
+
     "github.com/gin-gonic/gin"
     "github.com/gin-gonic/gin/binding"
     "github.com/spark8899/deploy-agent/global"
@@ -44,6 +46,10 @@ func init() {
     err = setupValidator()
     if err != nil {
         log.Fatalf("init.setupValidator err: %v", err)
+    }
+    err = setupTracer()
+    if err != nil {
+        log.Fatalf("init.setupTracer err: %v", err)
     }
 }
 
@@ -136,5 +142,14 @@ func setupValidator() error {
     global.Validator.Engine()
     binding.Validator = global.Validator
 
+    return nil
+}
+
+func setupTracer() error {
+    jaegerTracer, _, err := tracer.NewJaegerTracer("deploy-agent", "127.0.0.1:6831")
+    if err != nil {
+        return err
+    }
+    global.Tracer = jaegerTracer
     return nil
 }

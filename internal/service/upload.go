@@ -19,7 +19,7 @@ func (svc *Service) UploadFile(fileType upload.FileType, file multipart.File, fi
     if !upload.CheckContainExt(fileType, fileName) {
         return nil, errors.New("file suffix is not supported.")
     }
-    if upload.CheckFileName(fileName) {
+    if !upload.CheckFileName(fileName) {
         return nil, errors.New("file name is not supported.")
     }
     if upload.CheckMaxSize(fileType, file) {

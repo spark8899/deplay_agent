@@ -33,11 +33,12 @@ func (u Upload) UploadFile(c *gin.Context) {
     svc := service.New(c.Request.Context())
     fileInfo, err := svc.UploadFile(upload.FileType(fileType), file, fileHeader)
     if err != nil {
-        global.Logger.Errorf(c, "svc.UploadFile err: %v", err)
+        global.Logger.Errorf(c, "svc.UploadFile filename: `%v`, err: %v", fileHeader.Filename, err)
         response.ToErrorResponse(errcode.ErrorUploadFileFail.WithDetails(err.Error()))
         return
     }
 
+    global.Logger.Infof(c, "svc.UploadFile filename: `%v` upload success", fileHeader.Filename)
     response.ToResponse(gin.H{
         "file_name": fileInfo.Name,
         "file_md5": fileInfo.FileMD5,

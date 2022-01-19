@@ -18,14 +18,14 @@ const TypeFileGroup FileType = iota + 1
 
 func GetFileName(name string) string {
     ext := GetFileExt(name)
-    fileName := strings.TrimSuffix(name, ext)
+    fileName := strings.ToLower(strings.TrimSuffix(name, ext))
     //fileName = util.EncodeMD5(fileName)
 
     return fileName + ext
 }
 
 func GetFileExt(name string) string {
-    return path.Ext(name)
+    return strings.ToLower(path.Ext(name))
 }
 
 func GetSavePath() string {
