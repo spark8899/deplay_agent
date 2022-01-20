@@ -13,7 +13,7 @@ type ExecCommandRequest struct {
 
 func (svc *Service) ExecCommand(param *ExecCommandRequest) (string, error) {
     if !command.CheckCommand(param.Command) {
-        return "", errors.New(fmt.Sprintf("command: `%s` is not allow.", param.Command))
+        return "Command is not allow", errors.New(fmt.Sprintf("command: `%s` is not allow.", param.Command))
     }
     return command.RunCommand(param.Command)
 }

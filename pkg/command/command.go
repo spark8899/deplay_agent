@@ -16,7 +16,7 @@ func RunCommand(command string) (string, error) {
     // check app path
     _, err1 := exec.LookPath(app)
     if err1 !=nil {
-        return "path error\n", err1
+        return "Command path error", err1
     }
     cmd := exec.Command(app, args...)
     var stdout, stderr bytes.Buffer
@@ -25,10 +25,10 @@ func RunCommand(command string) (string, error) {
     cmd.Process.Wait()
     // get outStr, errStr
     outStr, errStr := stdout.String(), stderr.String()
+    info := fmt.Sprintf("%s::%s", outStr, errStr)
     if err2 != nil {
-        return fmt.Sprintf("out:%s,err:%s", outStr, errStr),  err2
+        return info,  err2
     }
-    info := fmt.Sprintf("out:\n%s\nerr:\n%s\n", outStr, errStr)
     return info, nil
 }
 
