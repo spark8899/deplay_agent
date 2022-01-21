@@ -28,10 +28,10 @@ func GetFileExt(name string) string {
     return strings.ToLower(path.Ext(name))
 }
 
-func GetSavePath() string {
+//func GetSavePath() string {
     //return global.AppSetting.UploadSavePath
-    return global.AppSetting.DeployPath
-}
+//    return global.AppSetting.DeployPath
+//}
 
 //func GetServerUrl() string {
 //    return global.AppSetting.UploadServerUrl
@@ -41,6 +41,17 @@ func CheckSavePath(dst string) bool {
     _, err := os.Stat(dst)
 
     return os.IsNotExist(err)
+}
+
+func CheckUploadPath(dst string) bool {
+    checkPath := strings.ToUpper(dst)
+    for _, allowSavePath := range global.AppSetting.DeployPath {
+        if strings.ToUpper(allowSavePath) == checkPath {
+            return true
+        }
+    }
+
+    return false
 }
 
 func CheckContainExt(t FileType, name string) bool {

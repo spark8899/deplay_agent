@@ -18,8 +18,8 @@ type AppSettingS struct {
     LogSavePath           string
     LogFileName           string
     LogFileExt            string
-    DeployPath            string
     UploadMaxSize         int
+    DeployPath            []string
     DeployFiles           []string
     ExecScripts           []string
     UploadAllowExts       []string

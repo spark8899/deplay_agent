@@ -10,7 +10,9 @@ App:
   LogSavePath: logs
   LogFileName: deploy-agent
   LogFileExt: .log
-  DeployPath: ../tech/deploy-agent
+  DeployPath:
+    - ../tech/deploy-agent
+    - ../tech/deploy-test
   DeployFiles:
     - aaa.txt
     - bbb.txt

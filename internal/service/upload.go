@@ -14,8 +14,11 @@ type FileInfo struct {
     FileMD5   string
 }
 
-func (svc *Service) UploadFile(fileType upload.FileType, file multipart.File, fileHeader *multipart.FileHeader) (*FileInfo, error) {
+func (svc *Service) UploadFile(fileType upload.FileType, file multipart.File, fileHeader *multipart.FileHeader, uploadSavePath string) (*FileInfo, error) {
     fileName := upload.GetFileName(fileHeader.Filename)
+    if !upload.CheckUploadPath(uploadSavePath) {
+        return nil, errors.New("file upload path is not supported.")
+    }
     if !upload.CheckContainExt(fileType, fileName) {
         return nil, errors.New("file suffix is not supported.")
     }
@@ -26,7 +29,7 @@ func (svc *Service) UploadFile(fileType upload.FileType, file multipart.File, fi
         return nil, errors.New("exceeded maximum file limit.")
     }
 
-    uploadSavePath := upload.GetSavePath()
+    //uploadSavePath := upload.GetSavePath()
     if upload.CheckSavePath(uploadSavePath) {
         if err := upload.CreateSavePath(uploadSavePath, os.ModePerm); err != nil {
             return nil, errors.New("failed to create save directory.")

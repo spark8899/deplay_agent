@@ -30,8 +30,14 @@ func (u Upload) UploadFile(c *gin.Context) {
         return
     }
 
+    uploadSavePath := c.PostForm("path")
+    if len(uploadSavePath) < 5 {
+        response.ToErrorResponse(errcode.InvalidParams)
+        return
+    }
+
     svc := service.New(c.Request.Context())
-    fileInfo, err := svc.UploadFile(upload.FileType(fileType), file, fileHeader)
+    fileInfo, err := svc.UploadFile(upload.FileType(fileType), file, fileHeader, uploadSavePath)
     if err != nil {
         global.Logger.Errorf(c, "svc.UploadFile filename: `%v`, err: %v", fileHeader.Filename, err)
         response.ToErrorResponse(errcode.ErrorUploadFileFail.WithDetails(err.Error()))
