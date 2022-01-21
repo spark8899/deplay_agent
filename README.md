@@ -2,8 +2,9 @@
 Cooperate with jenkin to update software and execute restart procedure
 
 # version plan
- * v1 Support specific file uploads and specific commands for a single project(Has been completed.)
- * v2 Support specific file uploads and specific commands for multiple projects
+ * v1 Support specific file uploads and specific commands for a single project(Has been completed)
+ * v2 Support specific file uploads and specific commands for multiple projects(developing)
+ * v3 Support websock command execution
 
 # Test example
 command api
