@@ -14,7 +14,11 @@ import (
 
 type FileType int
 
-const TypeFileGroup FileType = iota + 1
+const (
+    TypeTxt FileType = iota + 1
+    TypeBin
+    TypeImage
+)
 
 func GetFileName(name string) string {
     ext := GetFileExt(name)
@@ -58,13 +62,24 @@ func CheckContainExt(t FileType, name string) bool {
     ext := GetFileExt(name)
     ext = strings.ToUpper(ext)
     switch t {
-    case TypeFileGroup:
+    case TypeTxt:
         for _, allowExt := range global.AppSetting.UploadAllowExts {
             if strings.ToUpper(allowExt) == ext {
                 return true
             }
         }
-
+    case TypeBin:
+        for _, allowExt := range global.AppSetting.UploadAllowExts {
+            if strings.ToUpper(allowExt) == ext {
+                return true
+            }
+        }
+    case TypeImage:
+        for _, allowExt := range global.AppSetting.UploadAllowExts {
+            if strings.ToUpper(allowExt) == ext {
+                return true
+            }
+        }
     }
 
     return false
@@ -85,7 +100,15 @@ func CheckMaxSize(t FileType, f multipart.File) bool {
     content, _ := ioutil.ReadAll(f)
     size := len(content)
     switch t {
-    case TypeFileGroup:
+    case TypeTxt:
+        if size >= global.AppSetting.UploadMaxSize*1024 {
+            return true
+        }
+    case TypeBin:
+        if size >= global.AppSetting.UploadMaxSize*1024*1024 {
+            return true
+        }
+    case TypeImage:
         if size >= global.AppSetting.UploadMaxSize*1024*1024 {
             return true
         }

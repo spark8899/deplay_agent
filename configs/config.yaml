@@ -15,7 +15,7 @@ App:
     - ../tech/deploy-test
   DeployFiles:
     - aaa.txt
-    - bbb.txt
+    - bbb.xml
   ExecScripts:
     - ../tech/deploy-agent/startbb.sh
     - ../tech/deploy-agent/start.sh

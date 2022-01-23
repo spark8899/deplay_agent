@@ -3,8 +3,8 @@ Cooperate with jenkin to update software and execute restart procedure
 
 # version plan
  * v1 Support specific file uploads and specific commands for a single project(Has been completed)
- * v2 Support specific file uploads and specific commands for multiple projects(developing)
- * v3 on the basis of v2, it also supports websocket command execution
+ * v2 Support specific file uploads and specific commands for multiple projects(Has been completed)
+ * v3 on the basis of v2, it also supports websocket command execution(developing)
 
 # Test example
 command api
@@ -22,15 +22,18 @@ curl -XPOST http://localhost:8000/command -d 'command=../tech/deploy-agent/start
 
 upload api
 ```
-# upload filename  not allow
-curl http://localhost:8000/upload/file -F "file=@../tech/ccc.txt" -F type=1 -v
+# upload path not allow
+curl http://localhost:8000/upload/file -F "file=@../tech/ccc.txt" -F type=1 -F path="../tech/deploy-agentaa" -v
+
+# upload filename not allow
+curl http://localhost:8000/upload/file -F "file=@../tech/ccc.txt" -F type=1 -F path="../tech/deploy-agent" -v
 
 # upload file suffix not supported
-curl http://localhost:8000/upload/file -F "file=@../tech/aaa.txt" -F type=2 -v
+curl http://localhost:8000/upload/file -F "file=@../tech/aaa.txt" -F type=2 -F path="../tech/deploy-agent" -v
 
-# upload success
-curl http://localhost:8000/upload/file -F "file=@../tech/aaa.txt" -F type=1 -v
-curl http://localhost:8000/upload/file -F "file=@../tech/bbb.xml" -F type=2 -v
+# upload success (Type value, txt:1, bin:2, image:3)
+curl http://localhost:8000/upload/file -F "file=@../tech/aaa.txt" -F type=1 -F path="../tech/deploy-agent" -v
+curl http://localhost:8000/upload/file -F "file=@../tech/bbb.xml" -F type=2 -F path="../tech/deploy-test" -v
 ```
 
 # Build app
@@ -59,7 +62,9 @@ App:
   LogSavePath: logs
   LogFileName: deploy-agent
   LogFileExt: .log
-  DeployPath: /opt/app/xxx
+  DeployPath:
+    - /opt/app/aaa/
+    - /opt/app/bbb/
   DeployFiles:
     - xxx.jar
     - logback-spring.xml
