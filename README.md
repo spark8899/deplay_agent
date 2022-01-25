@@ -120,7 +120,7 @@ fi
 for num in 01 02 03 04
 do
   server_host=`ansible-inventory -i ${DATA}/${ENV}/inventory_dir/${ENV}-project --host ${PROJECT}${num} -y 2>/dev/null | awk '{print $NF}'`
-  if [ `echo ${server_host} | grep ansible_ssh_host | wc -l` -ne 1 ]; then echo "Error: Get inventory host is fault!"; exit 124; fi
+  if [ `echo ${server_host} | wc -l` -ne 1 ]; then echo "Error: Get inventory host is fault!"; exit 124; fi
   server_url="http://${server_host}:58881"
   echo "deploy ${PROJECT}${num}"
   echo "server_host: $server_host"
@@ -157,7 +157,7 @@ echo ""
 echo "##### DEPLOY INFO #####"
 echo "PROJECT: ${PROJECT}"
 echo "BUILD_VERSION: ${VERSION}"
-echo "MD5: `md5sum ${BUILD}/${PROJECT}/${VERSION}/${PROJECT}.jar`"
+echo "MD5: `md5sum ${DATA}/${PROJECT}/${VERSION}/${PROJECT}.jar`"
 echo "#######################"
 
 echo ""
