@@ -9,9 +9,9 @@ import (
     "github.com/spark8899/deploy-agent/global"
 )
 
-func RunCommand(command string) (string, error) {
+func RunCommand(dst string) (string, error) {
     // get app, args
-    parts := strings.Split(command, " ")
+    parts := strings.Split(dst, " ")
     app, args := parts[0], parts[1:]
     // check app path
     _, err1 := exec.LookPath(app)
@@ -32,9 +32,19 @@ func RunCommand(command string) (string, error) {
     return info, nil
 }
 
-func CheckCommand(command  string) bool {
+func CheckCommand(command string) bool {
     for _, allowCommand := range global.AppSetting.ExecScripts {
         if allowCommand == command {
+            return true
+        }
+    }
+
+    return false
+}
+
+func CheckPath(path string) bool {
+    for _, allowPath := range global.AppSetting.DeployPath {
+        if allowPath == path {
             return true
         }
     }

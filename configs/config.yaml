@@ -17,10 +17,10 @@ App:
     - aaa.txt
     - bbb.xml
   ExecScripts:
-    - ../tech/deploy-agent/startbb.sh
-    - ../tech/deploy-agent/start.sh
-    - ../tech/deploy-agent/start.sh error
-    - ../tech/deploy-agent/start.sh aaa
+    - startbb.sh
+    - start.sh
+    - start.sh error
+    - start.sh aaa
   UploadMaxSize: 500  # MB
   UploadAllowExts:
     - .txt

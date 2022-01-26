@@ -9,15 +9,17 @@ Cooperate with jenkin to update software and execute restart procedure
 # Test example
 command api
 ```
+# path not allow
+curl -XPOST http://localhost:8000/command -d 'command=start.sh aaa&path=../tech/deploy-agent222'
 # command not allow
-curl -XPOST http://localhost:8000/command -d 'command=../tech/deploy-agent/start.sh sss'
+curl -XPOST http://localhost:8000/command -d 'command=start.sh sss&path=../tech/deploy-agent'
 # command path error
-curl -XPOST http://localhost:8000/command -d 'command=../tech/deploy-agent/startbb.sh'
+curl -XPOST http://localhost:8000/command -d 'command=startbb.sh&path=../tech/deploy-agent'
 # command exec error
-curl -XPOST http://localhost:8000/command -d 'command=../tech/deploy-agent/start.sh error'
+curl -XPOST http://localhost:8000/command -d 'command=start.sh error&path=../tech/deploy-agent'
 # command exec success
-curl -XPOST http://localhost:8000/command -d 'command=../tech/deploy-agent/start.sh'
-curl -XPOST http://localhost:8000/command -d 'command=../tech/deploy-agent/start.sh aaa'
+curl -XPOST http://localhost:8000/command -d 'command=start.sh&path=../tech/deploy-agent'
+curl -XPOST http://localhost:8000/command -d 'command=start.sh aaa&path=../tech/deploy-agent'
 ```
 
 upload api
