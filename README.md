@@ -91,11 +91,13 @@ Description=deploy-agent
 After=network.target
 
 [Service]
+Type=simple
 ExecStart=/opt/app/deploy-agent/deploy-agent
 WorkingDirectory=/opt/app/deploy-agent
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
+KillMode=process
 User=xxxx
 Group=xxxx
 
